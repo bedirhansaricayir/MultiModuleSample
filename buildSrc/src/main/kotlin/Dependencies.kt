@@ -1,10 +1,11 @@
 object Versions {
     const val toolsBuild = "8.1.0"
-    const val toolsKotlin = "1.9.21"
+    const val toolsKotlin = "1.9.20"
     const val dagger = "2.42"
     const val material = "1.10.0"
     const val kotlin = "1.8.0-RC"
     const val core = "1.2.0"
+    const val compose = "1.2.0"
 }
 
 object BuildPlugins {
@@ -12,6 +13,7 @@ object BuildPlugins {
     const val TOOLS_KOTLIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.toolsKotlin}"
     const val TOOLS_DAGGER_HILT = "com.google.dagger:hilt-android-gradle-plugin:${Versions.dagger}"
     const val ANDROID_APPLICATION_PLUGIN = "com.android.application"
+    const val ANDROID_LIBRARY_PLUGIN = "com.android.library"
     const val KOTLIN_ANDROID_PLUGIN = "kotlin-android"
     const val KOTLIN_KAPT = "kotlin-kapt"
     const val DAGGER_HILT = "dagger.hilt.android.plugin"
@@ -25,8 +27,8 @@ object Di {
 }
 
 object Google {
-    const val MATERIAL_DESIGN = "com.google.android.material:material:${Versions.material}"
-    val list = listOf(MATERIAL_DESIGN,)
+    private const val MATERIAL_DESIGN = "com.google.android.material:material:${Versions.material}"
+    val list = listOf(MATERIAL_DESIGN)
 }
 
 object Kotlin {
@@ -36,4 +38,22 @@ object Kotlin {
     private const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlin}"
 
     val list = listOf(KT_STD, KTX_CORE, COROUTINES, COROUTINES_ANDROID)
+}
+
+object Compose {
+    private const val ACTIVITY_COMPOSE = "androidx.activity:activity-compose:${Versions.compose}"
+    private const val COMPOSE_UI = "androidx.compose.ui:ui:${Versions.compose}"
+    private const val COMPOSE_MATERIAL = "androidx.compose.material:material:${Versions.compose}"
+    private const val COMPOSE_TOOLING = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
+    private const val COMPOSE_DEBUG_TOOLING = "androidx.compose.ui:ui-tooling:${Versions.compose}"
+    private const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose:2.5.0-alpha01"
+
+    val list = listOf(
+        COMPOSE_UI,
+        ACTIVITY_COMPOSE,
+        COMPOSE_MATERIAL,
+        COMPOSE_TOOLING,
+        COMPOSE_DEBUG_TOOLING,
+        COMPOSE_NAVIGATION,
+    )
 }
