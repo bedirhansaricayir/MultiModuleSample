@@ -1,3 +1,5 @@
 include(":app")
 include(":navigator")
 include(":feature:home")
+include(":data")
+include(":domain")

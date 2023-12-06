@@ -58,6 +58,8 @@ dependencies {
 
     api(project(":feature:home"))
     api(project(":navigator"))
+    api(project(":data"))
+
 
     Google.list.forEach(::api)
     Kotlin.list.forEach(::api)

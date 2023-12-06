@@ -54,6 +54,7 @@ android {
 dependencies {
 
     api(project(":navigator"))
+    api(project(":domain"))
 
     Google.list.forEach(::api)
     Kotlin.list.forEach(::api)

@@ -1,11 +1,13 @@
 object Versions {
     const val toolsBuild = "8.1.0"
     const val toolsKotlin = "1.9.20"
-    const val dagger = "2.42"
+    const val dagger = "2.48.1"
     const val material = "1.10.0"
     const val kotlin = "1.8.0-RC"
     const val core = "1.2.0"
     const val compose = "1.2.0"
+    const val room = "2.6.1"
+    const val gson = "2.10.0"
 }
 
 object BuildPlugins {
@@ -56,4 +58,14 @@ object Compose {
         COMPOSE_DEBUG_TOOLING,
         COMPOSE_NAVIGATION,
     )
+}
+
+object ThirdParty {
+    const val GSON = "com.google.code.gson:gson:${Versions.gson}"
+}
+
+object Room {
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
+    const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+    const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
 }
