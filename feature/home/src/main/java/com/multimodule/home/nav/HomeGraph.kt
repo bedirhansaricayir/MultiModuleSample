@@ -21,7 +21,7 @@ fun NavGraphBuilder.homeGraph(
         route = Route.Home.name
     ) {
         composable(Screen.ListScreen.route) {
-            ListScreen(onAction)
+            ListScreen(onAction = onAction)
         }
 
         composable(Screen.DetailScreen.route) {

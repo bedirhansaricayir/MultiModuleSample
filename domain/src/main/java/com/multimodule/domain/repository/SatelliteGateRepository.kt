@@ -10,13 +10,13 @@ import com.multimodule.domain.model.SatelliteList
  */
 interface SatelliteGateRepository {
 
-    suspend fun getSatelliteList(): SatelliteList?
+    suspend fun getSatelliteList(): List<SatelliteList>?
 
     suspend fun getSatelliteFromCache(id: Int?): SatelliteDetail?
 
     suspend fun insertSatelliteCache(id: SatelliteDetail?)
 
-    suspend fun getSatelliteFromAsset(id: Int?): SatelliteDetail?
+    suspend fun getSatelliteFromAsset(id: Int?): List<SatelliteDetail>?
 
     suspend fun getPosition(id: Int?): Position?
 }

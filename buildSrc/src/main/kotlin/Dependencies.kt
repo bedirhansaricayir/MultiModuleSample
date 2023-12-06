@@ -7,7 +7,7 @@ object Versions {
     const val core = "1.2.0"
     const val compose = "1.2.0"
     const val room = "2.6.1"
-    const val gson = "2.10.0"
+    const val gson = "2.10.1"
 }
 
 object BuildPlugins {
@@ -48,7 +48,9 @@ object Compose {
     private const val COMPOSE_MATERIAL = "androidx.compose.material:material:${Versions.compose}"
     private const val COMPOSE_TOOLING = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
     private const val COMPOSE_DEBUG_TOOLING = "androidx.compose.ui:ui-tooling:${Versions.compose}"
-    private const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose:2.5.0-alpha01"
+    private const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose:2.5.3"
+    private const val COMPOSE_RUNTIME = "androidx.lifecycle:lifecycle-runtime-compose:2.6.0"
+
 
     val list = listOf(
         COMPOSE_UI,
@@ -57,11 +59,12 @@ object Compose {
         COMPOSE_TOOLING,
         COMPOSE_DEBUG_TOOLING,
         COMPOSE_NAVIGATION,
+        COMPOSE_RUNTIME,
     )
 }
 
 object ThirdParty {
-    const val GSON = "com.google.code.gson:gson:${Versions.gson}"
+    const val gson = "com.google.code.gson:gson:${Versions.gson}"
 }
 
 object Room {

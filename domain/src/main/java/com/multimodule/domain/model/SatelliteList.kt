@@ -7,5 +7,5 @@ package com.multimodule.domain.model
 data class SatelliteList(
     val id: Int?,
     val active: Boolean?,
-    val name: List<String>?,
+    val name: String?,
 )

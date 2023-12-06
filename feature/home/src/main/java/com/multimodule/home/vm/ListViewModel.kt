@@ -1,12 +1,14 @@
 package com.multimodule.home.vm
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.multimodule.domain.usecase.GetSatelliteUseCase
+import com.multimodule.domain.model.SatelliteList
+import com.multimodule.domain.usecase.GetSatelliteListUseCase
 import com.multimodule.domain.usecase.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,28 +18,31 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class ListViewModel @Inject constructor(
-    private val getSatelliteUseCase: GetSatelliteUseCase,
+    private val getSatelliteListUseCase: GetSatelliteListUseCase,
 ) : ViewModel() {
 
+    private val _state: MutableStateFlow<ListUIState> = MutableStateFlow(ListUIState.Loading)
+    val state = _state.asStateFlow()
+
     init {
-        getSatellite()
+        getSatelliteListUseCase()
     }
 
-    private fun getSatellite() {
+    private fun getSatelliteListUseCase() {
         viewModelScope.launch(Dispatchers.IO) {
-            getSatelliteUseCase.invoke().collect {
+            getSatelliteListUseCase.invoke().collect {
                 when (it) {
-                    is Response.Error -> {
-                        Log.d("Result",it.errorMessage)
-                    }
-                    Response.Loading -> {
-                        Log.d("Result","Loading")
-                    }
-                    is Response.Success -> {
-                        Log.d("Result",it.data?.id.toString())
-                    }
+                    is Response.Error -> _state.value = ListUIState.Error(it.errorMessage)
+                    is Response.Loading -> _state.value = ListUIState.Loading
+                    is Response.Success -> _state.value = ListUIState.Success(it.data)
                 }
             }
         }
+    }
+
+    sealed class ListUIState {
+        data object Loading : ListUIState()
+        data class Success(val data: List<SatelliteList>?) : ListUIState()
+        data class Error(val error: String?) : ListUIState()
     }
 }

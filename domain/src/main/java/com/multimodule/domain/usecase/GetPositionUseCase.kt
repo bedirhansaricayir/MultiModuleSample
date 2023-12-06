@@ -1,6 +1,6 @@
 package com.multimodule.domain.usecase
 
-import com.multimodule.domain.model.SatelliteDetail
+import com.multimodule.domain.model.Position
 import com.multimodule.domain.repository.SatelliteGateRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -9,15 +9,15 @@ import javax.inject.Inject
 
 
 /**
- * Created by bedirhansaricayir on 6.12.2023.
+ * Created by bedirhansaricayir on 7.12.2023.
  */
-class GetSatelliteUseCase @Inject constructor(private val repository: SatelliteGateRepository) {
+class GetPositionUseCase @Inject constructor(private val repository: SatelliteGateRepository) {
 
-    suspend operator fun invoke(): Flow<Response<List<SatelliteDetail>>> = flow {
+    suspend operator fun invoke(): Flow<Response<Position>> = flow {
         try {
             emit(Response.Loading)
 
-            emit(Response.Success(data = repository.getSatelliteFromAsset(1)))
+            emit(Response.Success(data = repository.getPosition(1)))
         } catch (e: IOException) {
             emit(Response.Error(errorMessage = "NO_INTERNET"))
         } catch (e: Exception) {

@@ -1,8 +1,10 @@
 package com.multimodule.data.repository
 
 import com.multimodule.data.cache.SatelliteDao
+import com.multimodule.data.mapper.SatelliteMapper.assetToDomain
 import com.multimodule.data.mapper.SatelliteMapper.cacheToDomain
 import com.multimodule.data.mapper.SatelliteMapper.domainToCache
+import com.multimodule.data.reader.AssetReader
 import com.multimodule.domain.model.Position
 import com.multimodule.domain.model.SatelliteDetail
 import com.multimodule.domain.model.SatelliteList
@@ -15,9 +17,10 @@ import javax.inject.Inject
  */
 class SatelliteRepositoryImpl @Inject constructor(
     private val dao: SatelliteDao,
+    private val assetReader: AssetReader,
 ) : SatelliteGateRepository {
-    override suspend fun getSatelliteList(): SatelliteList {
-        TODO("Not yet implemented")
+    override suspend fun getSatelliteList(): List<SatelliteList>? {
+        return assetReader.readSatelliteList()?.map { it.assetToDomain() }
     }
 
     override suspend fun getSatelliteFromCache(id: Int?): SatelliteDetail? {
@@ -28,12 +31,12 @@ class SatelliteRepositoryImpl @Inject constructor(
         satelliteDetail?.domainToCache()?.let { dao.insertItem(it) }
     }
 
-    override suspend fun getSatelliteFromAsset(id: Int?): SatelliteDetail {
-        TODO("Not yet implemented")
+    override suspend fun getSatelliteFromAsset(id: Int?): List<SatelliteDetail>? {
+        return assetReader.readSatelliteDetail()?.map { it.assetToDomain() }
     }
 
-    override suspend fun getPosition(id: Int?): Position {
-        TODO("Not yet implemented")
+    override suspend fun getPosition(id: Int?): Position? {
+        return assetReader.readPositions()?.assetToDomain()
     }
 
 }
