@@ -17,10 +17,18 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
+import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -46,7 +54,9 @@ fun ListScreen(
     val uiState by viewModel.state.collectAsStateWithLifecycle()
 
     Scaffold(topBar = {
-
+        SearchBar {
+            viewModel.setSearchText(it)
+        }
     }) {
         Column(
             Modifier
@@ -57,7 +67,10 @@ fun ListScreen(
             when (uiState) {
                 is ListViewModel.ListUIState.Error -> Text(text = (uiState as ListViewModel.ListUIState.Error).error.orEmpty())
                 is ListViewModel.ListUIState.Loading -> CircularProgressIndicator()
-                is ListViewModel.ListUIState.Success -> List((uiState as ListViewModel.ListUIState.Success).data.orEmpty(), onClick = onAction)
+                is ListViewModel.ListUIState.Success -> List(
+                    (uiState as ListViewModel.ListUIState.Success).data.orEmpty(),
+                    onClick = onAction
+                )
 
             }
         }
@@ -90,8 +103,9 @@ fun SatelliteItem(
 ) {
     val isActive = item.active == true
     Row(
-        modifier = modifier.fillMaxWidth()
-            .clickable { onClick.invoke(item.id!!,item.name!!) },
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onClick.invoke(item.id!!, item.name!!) },
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -117,4 +131,44 @@ fun SatelliteItem(
             )
         }
     }
+}
+
+@Composable
+fun SearchBar(onSearch: (String) -> Unit) {
+    var text by remember { mutableStateOf("") }
+
+    TextField(
+        value = text,
+        onValueChange = {
+            onSearch(it)
+            text = it
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = "Search",
+                tint = Color.Black
+            )
+        },
+        placeholder = {
+            Text(text = "Search")
+        },
+        trailingIcon = {
+            if (text.isNotBlank()) {
+                Icon(
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .clickable {
+                            text = ""
+                            onSearch("")
+                        },
+                    imageVector = Icons.Default.Clear,
+                    contentDescription = "Clear"
+                )
+            }
+        }
+    )
 }
