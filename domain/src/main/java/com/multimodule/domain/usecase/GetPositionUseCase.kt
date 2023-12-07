@@ -13,11 +13,11 @@ import javax.inject.Inject
  */
 class GetPositionUseCase @Inject constructor(private val repository: SatelliteGateRepository) {
 
-    suspend operator fun invoke(): Flow<Response<Position>> = flow {
+    suspend operator fun invoke(id: Int?): Flow<Response<Position>> = flow {
         try {
             emit(Response.Loading)
 
-            emit(Response.Success(data = repository.getPosition(1)))
+            emit(Response.Success(data = repository.getPosition(id)))
         } catch (e: IOException) {
             emit(Response.Error(errorMessage = "NO_INTERNET"))
         } catch (e: Exception) {

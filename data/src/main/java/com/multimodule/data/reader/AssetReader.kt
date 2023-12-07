@@ -10,7 +10,7 @@ import com.multimodule.data.model.SatelliteListAssetModel
  */
 interface AssetReader {
 
-    fun readPositions(): PositionAssetModel?
-    fun readSatelliteDetail(): List<SatelliteDetailAssetModel>?
+    fun readPositions(id: Int?): PositionAssetModel?
+    fun readSatelliteDetail(id: Int?): SatelliteDetailAssetModel?
     fun readSatelliteList(): List<SatelliteListAssetModel>?
 }

@@ -13,11 +13,17 @@ import javax.inject.Inject
  */
 class GetSatelliteUseCase @Inject constructor(private val repository: SatelliteGateRepository) {
 
-    suspend operator fun invoke(): Flow<Response<List<SatelliteDetail>>> = flow {
+    suspend operator fun invoke(id: Int?): Flow<Response<SatelliteDetail>> = flow {
         try {
             emit(Response.Loading)
-
-            emit(Response.Success(data = repository.getSatelliteFromAsset(1)))
+            val satelliteFromCache = repository.getSatelliteFromCache(id)
+            if (satelliteFromCache != null) {
+                emit(Response.Success(data = satelliteFromCache))
+            } else {
+                val satelliteFromAsset = repository.getSatelliteFromAsset(id)
+                repository.insertSatelliteCache(satelliteFromAsset)
+                emit(Response.Success(data = satelliteFromAsset))
+            }
         } catch (e: IOException) {
             emit(Response.Error(errorMessage = "NO_INTERNET"))
         } catch (e: Exception) {

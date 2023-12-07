@@ -9,7 +9,7 @@ data class Position(
 )
 
 data class PositionList(
-    val id: String?,
+    val id: Int?,
     val positions: List<Positions>?
 )
 

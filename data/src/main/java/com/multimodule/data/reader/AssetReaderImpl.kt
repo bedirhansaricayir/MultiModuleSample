@@ -18,9 +18,10 @@ class AssetReaderImpl @Inject constructor(private val context: Context?, private
         val jsonFileString = context?.assets?.open(fileName)?.bufferedReader().use { it?.readText() }
         return gson?.fromJson(jsonFileString, object : TypeToken<T>() {}.type)
     }
-    override fun readPositions(): PositionAssetModel? = readFile("positions.json")
+    override fun readPositions(id: Int?): PositionAssetModel? = readFile("positions.json")
 
-    override fun readSatelliteDetail(): List<SatelliteDetailAssetModel>? = readFile("satellite_detail.json")
+    override fun readSatelliteDetail(id:Int?): SatelliteDetailAssetModel? =
+        readFile<List<SatelliteDetailAssetModel>>("satellite_detail.json")?.find { it.id == id }
 
     override fun readSatelliteList(): List<SatelliteListAssetModel>? = readFile("satellite_list.json")
 }

@@ -31,12 +31,12 @@ class SatelliteRepositoryImpl @Inject constructor(
         satelliteDetail?.domainToCache()?.let { dao.insertItem(it) }
     }
 
-    override suspend fun getSatelliteFromAsset(id: Int?): List<SatelliteDetail>? {
-        return assetReader.readSatelliteDetail()?.map { it.assetToDomain() }
+    override suspend fun getSatelliteFromAsset(id: Int?): SatelliteDetail? {
+        return assetReader.readSatelliteDetail(id)?.assetToDomain()
     }
 
     override suspend fun getPosition(id: Int?): Position? {
-        return assetReader.readPositions()?.assetToDomain()
+        return assetReader.readPositions(id)?.assetToDomain()
     }
 
 }

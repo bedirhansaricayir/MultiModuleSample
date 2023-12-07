@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
                 navController = navController,
                 startDestination = Route.Home.name,
             ) {
-                homeGraph {
-                    navController.navigate(Screen.DetailScreen.route)
+                homeGraph { id, name ->
+                    navController.navigate(Screen.DetailScreen.passIdAndName(id, name))
                 }
             }
         }

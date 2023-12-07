@@ -9,7 +9,7 @@ data class PositionAssetModel(
 )
 
 data class PositionListAssetModel(
-    val id: String?,
+    val id: Int?,
     val positions: List<PositionsAssetModel>?,
 )
 

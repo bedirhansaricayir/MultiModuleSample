@@ -16,7 +16,7 @@ interface SatelliteGateRepository {
 
     suspend fun insertSatelliteCache(id: SatelliteDetail?)
 
-    suspend fun getSatelliteFromAsset(id: Int?): List<SatelliteDetail>?
+    suspend fun getSatelliteFromAsset(id: Int?): SatelliteDetail?
 
     suspend fun getPosition(id: Int?): Position?
 }

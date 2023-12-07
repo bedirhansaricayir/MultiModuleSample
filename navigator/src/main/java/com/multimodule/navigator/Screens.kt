@@ -8,7 +8,15 @@ package com.multimodule.navigator
 sealed class Screen(
     val route: String,
 ) {
-    object DetailScreen : Screen("detailScreen")
+    object DetailScreen : Screen("detailScreen/{itemId}/{name}") {
+        fun passIdAndName(
+            id: Int,
+            name: String
+        ): String {
+            return "detailScreen/$id/$name"
+        }
+    }
+
     object ListScreen : Screen("listScreen")
 
 }
