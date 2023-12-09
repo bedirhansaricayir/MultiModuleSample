@@ -8,6 +8,9 @@ object Versions {
     const val compose = "1.2.0"
     const val room = "2.6.1"
     const val gson = "2.10.1"
+    const val junit = "4.13.2"
+    const val mockk = "1.13.7"
+    const val truth = "1.1.4"
 }
 
 object BuildPlugins {
@@ -71,4 +74,16 @@ object Room {
     const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
     const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
     const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+}
+
+object Test {
+     const val JUNIT = "junit:junit:${Versions.junit}"
+     const val MOCKK = "io.mockk:mockk:${Versions.mockk}"
+     const val TRUTH = "com.google.truth:truth:${Versions.truth}"
+
+    val list = listOf(
+        JUNIT,
+        MOCKK,
+        TRUTH
+    )
 }

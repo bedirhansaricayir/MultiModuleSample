@@ -40,4 +40,12 @@ dependencies {
         kapt(hiltAndroidCompiler)
         kapt(hiltCompiler)
     }
+
+    /*Test*/
+    with(Test) {
+        testImplementation(JUNIT)
+        testImplementation(MOCKK)
+        testImplementation(TRUTH)
+
+    }
 }
