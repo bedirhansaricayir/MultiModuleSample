@@ -7,7 +7,7 @@ This application has been developed to use and practice multi-module architectur
 <div style="display: flex; width: 100%">
   <img src="docs/dashboard.png" width="25%"/>
   <img src="docs/search.png" width="25%"/>
-  <img src="docs/detail" width="25%"/>
+  <img src="docs/detail.png" width="25%"/>
   </div>
 
 ## Tech Stack
