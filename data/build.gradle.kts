@@ -12,6 +12,8 @@ android {
     defaultConfig {
         namespace = (AppVersions.APPLICATION_ID)
         minSdk = (AppVersions.MIN_SDK)
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -52,6 +54,15 @@ dependencies {
         api(roomRuntime)
         kapt(roomCompiler)
     }
+
+    /*Test*/
+    with(Test) {
+        androidTestImplementation(JUNIT)
+        androidTestImplementation(JUNIT_EXT)
+        androidTestImplementation(RUNNER)
+        androidTestImplementation(TRUTH)
+    }
+
 
     api(ThirdParty.gson)
 

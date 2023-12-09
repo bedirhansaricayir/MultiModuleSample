@@ -11,6 +11,8 @@ object Versions {
     const val junit = "4.13.2"
     const val mockk = "1.13.7"
     const val truth = "1.1.4"
+    const val junit_ext = "1.1.1"
+    const val runner = "1.5.2"
 }
 
 object BuildPlugins {
@@ -80,10 +82,6 @@ object Test {
      const val JUNIT = "junit:junit:${Versions.junit}"
      const val MOCKK = "io.mockk:mockk:${Versions.mockk}"
      const val TRUTH = "com.google.truth:truth:${Versions.truth}"
-
-    val list = listOf(
-        JUNIT,
-        MOCKK,
-        TRUTH
-    )
+     const val JUNIT_EXT = "androidx.test.ext:junit:${Versions.junit_ext}"
+     const val RUNNER = "androidx.test:runner:${Versions.runner}"
 }
